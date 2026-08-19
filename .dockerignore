@@ -1,0 +1,61 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Testing
+coverage
+.nyc_output
+
+# Cache
+.cache
+*.log
+
+# Environment files (should be provided at runtime)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+docs/
+
+# Docker files (we don't need to copy these into the image)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Misc
+*.md
+*.txt
+!requirements.txt
+
+# Development files
+.eslintcache
+.turbo
+tsconfig.tsbuildinfo

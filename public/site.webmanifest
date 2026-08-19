@@ -1,0 +1,22 @@
+{
+  "name": "RFM TradePro",
+  "short_name": "RFM TradePro",
+  "description": "Trading & Investment Platform - Revolutionizing your digital trading experience",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0a0e14",
+  "theme_color": "#22c55e",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["finance", "business"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
