@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/landing/Header';
-import { Footer } from '@/components/landing/Footer';
 import { Shield, Users, Globe, Award, TrendingUp, Lock, Headphones, Zap } from 'lucide-react';
 
 // ============================================
@@ -64,8 +62,6 @@ const leadership = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#0a0e14]">
-      <Header />
-      
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 px-6">
@@ -191,8 +187,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

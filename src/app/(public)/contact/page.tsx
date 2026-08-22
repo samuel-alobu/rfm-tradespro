@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Header } from '@/components/landing/Header';
-import { Footer } from '@/components/landing/Footer';
 import { 
   Mail, 
   Phone, 
@@ -110,8 +108,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0e14]">
-      <Header />
-      
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-16 px-6 bg-[#0f1419]">
@@ -363,8 +359,6 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

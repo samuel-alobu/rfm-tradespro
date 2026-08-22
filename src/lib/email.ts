@@ -342,6 +342,132 @@ function baseEmailTemplate(content: string, preheader?: string): string {
 // ============================================
 
 /**
+ * Send two-factor authentication code
+ */
+export async function sendTwoFactorEmail(
+  email: string,
+  verificationCode: string
+): Promise<{ success: boolean; error?: string }> {
+  const template: EmailTemplate = {
+    subject: `Your ${APP_NAME} Verification Code`,
+    html: baseEmailTemplate(`
+      <h1>Verification Code</h1>
+      <p class="subtitle">Secure authentication required</p>
+
+      <p>A sign-in attempt was detected for your account. Use the verification code below to complete your login:</p>
+
+      <div style="background-color: ${BRAND_BG_DARK}; border: 2px solid ${BRAND_GREEN}; border-radius: 12px; padding: 24px; text-align: center; margin: 28px 0;">
+        <span style="font-size: 36px; font-weight: 700; letter-spacing: 8px; color: ${BRAND_GREEN}; font-family: 'Courier New', monospace;">${verificationCode}</span>
+      </div>
+
+      <div class="warning-box">
+        <p><strong>This code expires in 10 minutes.</strong> If you did not attempt to sign in, please secure your account immediately by changing your password.</p>
+      </div>
+
+      <div class="info-box">
+        <p><strong>Security tip:</strong> ${APP_NAME} will never ask for your verification code via phone, SMS, or social media. Only enter this code on the official ${APP_NAME} website.</p>
+      </div>
+    `, `Your ${APP_NAME} verification code is ${verificationCode}`),
+    text: `
+Your ${APP_NAME} verification code is: ${verificationCode}
+
+This code expires in 10 minutes.
+
+If you did not attempt to sign in, please secure your account immediately by changing your password.
+
+Security tip: ${APP_NAME} will never ask for your verification code via phone, SMS, or social media. Only enter this code on the official ${APP_NAME} website.
+    `.trim(),
+  };
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: email,
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    });
+
+    if (error) {
+      console.error('Error sending 2FA email:', error);
+      return { success: false, error: error.message };
+    }
+
+    console.log(`2FA email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending 2FA email:', error);
+    return { success: false, error: 'Failed to send 2FA email' };
+  }
+}
+
+/**
+ * Send account deletion confirmation code
+ */
+export async function sendAccountDeletionEmail(
+  email: string,
+  deletionCode: string
+): Promise<{ success: boolean; error?: string }> {
+  const dangerRed = '#ef4444';
+
+  const template: EmailTemplate = {
+    subject: `Account Deletion Request - ${APP_NAME}`,
+    html: baseEmailTemplate(`
+      <h1>Confirm Account Deletion</h1>
+      <p class="subtitle">Account deletion request</p>
+
+      <p>We received a request to permanently delete your ${APP_NAME} account. If you made this request, use the verification code below to confirm:</p>
+
+      <div style="background-color: ${BRAND_BG_DARK}; border: 2px solid ${dangerRed}; border-radius: 12px; padding: 24px; text-align: center; margin: 28px 0;">
+        <span style="font-size: 36px; font-weight: 700; letter-spacing: 8px; color: ${dangerRed}; font-family: 'Courier New', monospace;">${deletionCode}</span>
+      </div>
+
+      <div class="warning-box">
+        <p><strong>This code expires in 10 minutes.</strong> If you did not request this deletion, please ignore this email and secure your account by changing your password immediately.</p>
+      </div>
+
+      <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid ${dangerRed}; border-radius: 8px; padding: 16px 20px; margin: 24px 0;">
+        <p style="margin: 0; font-size: 14px; color: #991b1b; line-height: 1.6;"><strong>Warning:</strong> Account deletion is permanent. Your profile, settings, and preferences will be removed. Transaction records may be retained for regulatory compliance.</p>
+      </div>
+    `, `Your ${APP_NAME} account deletion code is ${deletionCode}`),
+    text: `
+Account Deletion Request - ${APP_NAME}
+
+We received a request to permanently delete your ${APP_NAME} account.
+
+Your deletion verification code is: ${deletionCode}
+
+This code expires in 10 minutes.
+
+If you did not request this deletion, please ignore this email and secure your account by changing your password immediately.
+
+Warning: Account deletion is permanent. Your profile, settings, and preferences will be removed. Transaction records may be retained for regulatory compliance.
+    `.trim(),
+  };
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: email,
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    });
+
+    if (error) {
+      console.error('Error sending account deletion email:', error);
+      return { success: false, error: error.message };
+    }
+
+    console.log(`Account deletion email sent to ${email}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending account deletion email:', error);
+    return { success: false, error: 'Failed to send account deletion email' };
+  }
+}
+
+/**
  * Send email verification
  */
 export async function sendVerificationEmail(

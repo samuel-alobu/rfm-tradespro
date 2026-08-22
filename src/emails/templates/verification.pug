@@ -1,0 +1,37 @@
+extends ../layouts/base.pug
+
+block content
+  -
+    const verificationAppName = typeof APP_NAME !== 'undefined' ? APP_NAME : 'RFM TradePro';
+    const verificationRecipientName = typeof name !== 'undefined' ? name : 'there';
+    const verificationUrlValue =
+      typeof verificationUrl !== 'undefined'
+        ? verificationUrl
+        : typeof url !== 'undefined'
+          ? url
+          : typeof link !== 'undefined'
+            ? link
+            : '#';
+
+  h1 Verify Your Email Address
+  p.subtitle One quick step to activate your account
+
+  p.greeting Hi #{verificationRecipientName},
+
+  p Thank you for creating an account with #{verificationAppName}. To get started with trading, please verify your email address by clicking the button below.
+
+  .button-container
+    a.button(href=verificationUrlValue) Verify Email Address
+
+  .link-box
+    p Or copy and paste this link into your browser:
+    a(href=verificationUrlValue)= verificationUrlValue
+
+  .warning-box
+    p
+      strong This link expires in 24 hours.
+      |  If you did not create an account with #{verificationAppName}, you can safely ignore this email.
+
+  .divider
+
+  p(style="font-size: 14px; color: #6b7a90;") Need help? Contact our support team.

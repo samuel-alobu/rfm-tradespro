@@ -87,6 +87,11 @@ const nextConfig: NextConfig = {
     APP_URL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   },
 
+  // Pug templates are read from disk by server routes/components at runtime.
+  outputFileTracingIncludes: {
+    "/*": ["./src/templates/**/*.pug", "./src/emails/**/*.pug"],
+  },
+
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",

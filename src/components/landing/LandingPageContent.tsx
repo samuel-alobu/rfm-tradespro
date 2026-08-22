@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, LineChart, Coins, Globe, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import {
-  Header,
-  Footer,
   FeaturesSection,
   StatsSection,
   FloatingTestimonials,
@@ -15,15 +13,16 @@ import {
 } from '@/components/landing';
 
 // ============================================
-// Landing Page - Professional Design
+// Landing Page Content
 // ============================================
 
-export default function LandingPage() {
+interface LandingPageContentProps {
+  heroHtml: string;
+}
+
+export function LandingPageContent({ heroHtml }: LandingPageContentProps) {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
-      {/* Header */}
-      <Header />
-
       {/* Hero Section - Dark with Trading Background */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#0a0e14]">
         {/* Background - Trading Chart Image */}
@@ -43,39 +42,8 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-          >
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-              <span className="text-white">
-                Revolutionizing your digital
-              </span>
-              <br />
-              <span className="text-white">
-                trading experience
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10">
-              Seamlessly merging complexity with ease, RFM TradePro offers
-              top-notch security, 24/7 support, and an intuitive platform for
-              your tenacious trading and investment needs.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/register">
-                <Button size="xl" rightIcon={<ArrowRight className="h-5 w-5" />}>
-                  Get started
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="secondary" size="xl">
-                  Log in
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+            dangerouslySetInnerHTML={{ __html: heroHtml }}
+          />
         </div>
       </section>
 
@@ -217,8 +185,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
     </main>
   );
 }
+
+export default LandingPageContent;

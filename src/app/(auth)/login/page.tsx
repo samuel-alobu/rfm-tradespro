@@ -50,13 +50,23 @@ function LoginForm() {
       setIsLoading(true);
       setError(null);
 
-      // First, check if 2FA is required
-      const checkRes = await fetch('/api/auth/2fa', {
+      // Validate credentials and resend account verification email if needed.
+      const checkRes = await fetch('/api/auth/login-check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'check', email: data.email }),
+        body: JSON.stringify({ email: data.email, password: data.password }),
       });
       const checkData = await checkRes.json();
+
+      if (!checkRes.ok) {
+        setError(checkData.error || 'Authentication failed');
+        return;
+      }
+
+      if (checkData.emailVerified === false) {
+        router.push('/verify-email?email=' + encodeURIComponent(data.email));
+        return;
+      }
 
       if (checkData.requires2FA) {
         // Store credentials and validate + send 2FA code
@@ -77,6 +87,12 @@ function LoginForm() {
         const sendData = await sendRes.json();
         
         if (sendRes.ok) {
+          if (sendData.requiresEmailVerification) {
+            setIsSendingCode(false);
+            router.push('/verify-email?email=' + encodeURIComponent(data.email));
+            return;
+          }
+
           setMaskedEmail(sendData.maskedEmail);
           setRequires2FA(true);
         } else {

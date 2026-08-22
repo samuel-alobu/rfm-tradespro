@@ -39,8 +39,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return null;
           }
 
-          // Check if account is suspended or banned
-          if (user.status === 'suspended' || user.status === 'banned') {
+          // Check if account is suspended, banned, or deleted
+          if (['suspended', 'banned', 'deleted'].includes(user.status)) {
             return null;
           }
 
@@ -58,6 +58,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             
             await user.save();
             return null;
+          }
+
+          if (!user.emailVerified) {
+            return null;
+          }
+
+          if (user.twoFactorEnabled) {
+            if (!user.twoFactorVerifiedUntil || user.twoFactorVerifiedUntil < new Date()) {
+              return null;
+            }
+
+            user.twoFactorVerifiedUntil = undefined;
           }
 
           // Reset login attempts on successful login

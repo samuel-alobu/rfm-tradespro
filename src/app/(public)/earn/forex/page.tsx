@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/landing/Header';
-import { Footer } from '@/components/landing/Footer';
 import { 
   TrendingUp, 
   Shield, 
@@ -81,8 +79,6 @@ const accountTypes = [
 export default function ForexPage() {
   return (
     <div className="min-h-screen bg-[#0a0e14]">
-      <Header />
-      
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 px-6">
@@ -273,8 +269,6 @@ export default function ForexPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

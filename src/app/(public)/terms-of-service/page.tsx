@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/landing/Header';
-import { Footer } from '@/components/landing/Footer';
 import { FileText, ArrowLeft } from 'lucide-react';
 
 // ============================================
@@ -11,8 +9,6 @@ import { FileText, ArrowLeft } from 'lucide-react';
 export default function TermsOfServicePage() {
   return (
     <div className="min-h-screen bg-[#0a0e14]">
-      <Header />
-      
       <main className="pt-20">
         {/* Header */}
         <section className="py-12 px-6 bg-[#0f1419]">
@@ -279,8 +275,6 @@ export default function TermsOfServicePage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
