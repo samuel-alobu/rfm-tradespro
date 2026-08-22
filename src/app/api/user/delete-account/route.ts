@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { auth } from '@/lib/auth';
 import { connectToDatabase } from '@/db/connection';
 import { User } from '@/db/models';
-import { sendAccountDeletionEmail } from '@/lib/email';
+import { sendAccountDeletionCodeEmail } from '@/lib/email';
 
 // Generate 6-digit code
 function generateCode(): string {
@@ -49,8 +49,11 @@ export async function POST(request: NextRequest) {
       user.deleteAccountExpires = expiresAt;
       await user.save();
 
-      // Send email with deletion code
-      const emailResult = await sendAccountDeletionEmail(user.email, deletionCode);
+      const emailResult = await sendAccountDeletionCodeEmail(
+        user.email,
+        user.firstName,
+        deletionCode
+      );
 
       if (!emailResult.success) {
         console.error('Failed to send deletion email:', emailResult.error);

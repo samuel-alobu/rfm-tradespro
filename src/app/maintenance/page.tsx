@@ -1,30 +1,34 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Wrench, RefreshCw, Mail, Clock } from 'lucide-react';
-import { Logo } from '@/components/ui/Logo';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Wrench, RefreshCw, Mail, Clock } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
+import { getCopyrightYearRange } from "@/utils";
 
 // ============================================
 // Maintenance Page
 // ============================================
 
 export default function MaintenancePage() {
-  const [message, setMessage] = useState('We are currently performing scheduled maintenance. Please check back soon.');
+  const [message, setMessage] = useState(
+    "We are currently performing scheduled maintenance. Please check back soon.",
+  );
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const copyrightYearRange = getCopyrightYearRange();
 
   useEffect(() => {
     // Fetch maintenance message
     const fetchStatus = async () => {
       try {
-        const res = await fetch('/api/status');
+        const res = await fetch("/api/status");
         const data = await res.json();
         if (data.message) {
           setMessage(data.message);
         }
         // If maintenance is off, redirect to home
         if (!data.maintenance) {
-          window.location.href = '/';
+          window.location.href = "/";
         }
       } catch {
         // Keep default message
@@ -36,10 +40,10 @@ export default function MaintenancePage() {
   const handleRefresh = async () => {
     setIsRefreshing(true);
     try {
-      const res = await fetch('/api/status');
+      const res = await fetch("/api/status");
       const data = await res.json();
       if (!data.maintenance) {
-        window.location.href = '/';
+        window.location.href = "/";
       }
     } catch {
       // Keep on page
@@ -88,9 +92,11 @@ export default function MaintenancePage() {
                 <div className="w-3 h-3 bg-[#f59e0b] rounded-full" />
                 <div className="absolute inset-0 w-3 h-3 bg-[#f59e0b] rounded-full animate-ping" />
               </div>
-              <span className="text-[#f59e0b] font-medium">Maintenance in Progress</span>
+              <span className="text-[#f59e0b] font-medium">
+                Maintenance in Progress
+              </span>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4 text-left">
               <div className="p-3 bg-[#0a0e14] rounded-lg">
                 <div className="flex items-center gap-2 text-[#6b7a90] text-sm mb-1">
@@ -116,8 +122,10 @@ export default function MaintenancePage() {
               disabled={isRefreshing}
               className="flex items-center justify-center gap-2 px-6 py-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-medium rounded-xl transition-colors disabled:opacity-50"
             >
-              <RefreshCw className={`h-5 w-5 ${isRefreshing ? 'animate-spin' : ''}`} />
-              {isRefreshing ? 'Checking...' : 'Check Status'}
+              <RefreshCw
+                className={`h-5 w-5 ${isRefreshing ? "animate-spin" : ""}`}
+              />
+              {isRefreshing ? "Checking..." : "Check Status"}
             </button>
             <a
               href="mailto:support@rfmtradepro.com"
@@ -133,7 +141,7 @@ export default function MaintenancePage() {
       {/* Footer */}
       <footer className="p-6 text-center">
         <p className="text-sm text-[#6b7a90]">
-          © {new Date().getFullYear()} RFM TradePro. All rights reserved.
+          © {copyrightYearRange} Oasis MarketPro. All rights reserved.
         </p>
       </footer>
 

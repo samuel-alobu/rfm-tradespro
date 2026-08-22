@@ -1,16 +1,23 @@
-'use client';
+"use client";
 
-import React, { useState, Suspense } from 'react';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
-import { Mail, Lock, AlertCircle, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { Spinner } from '@/components/ui/Loading';
-import { loginSchema, type LoginFormData } from '@/lib/validations';
+import React, { useState, Suspense } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getSession, signIn } from "next-auth/react";
+import {
+  Mail,
+  Lock,
+  AlertCircle,
+  ShieldCheck,
+  ArrowLeft,
+  Loader2,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Spinner } from "@/components/ui/Loading";
+import { loginSchema, type LoginFormData } from "@/lib/validations";
 
 // ============================================
 // Login Form Component (uses useSearchParams)
@@ -19,17 +26,17 @@ import { loginSchema, type LoginFormData } from '@/lib/validations';
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
-  
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // 2FA state
   const [requires2FA, setRequires2FA] = useState(false);
-  const [pendingEmail, setPendingEmail] = useState('');
-  const [pendingPassword, setPendingPassword] = useState('');
-  const [maskedEmail, setMaskedEmail] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
+  const [pendingEmail, setPendingEmail] = useState("");
+  const [pendingPassword, setPendingPassword] = useState("");
+  const [maskedEmail, setMaskedEmail] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
   const [isSendingCode, setIsSendingCode] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
 
@@ -40,56 +47,76 @@ function LoginForm() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
+
+  const sendAccountVerificationEmail = async (email: string) => {
+    const response = await fetch(
+      `/api/auth/verify-email?email=${encodeURIComponent(email)}`,
+    );
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "Failed to send verification email");
+    }
+  };
+
+  const handlePostSignIn = async (email: string) => {
+    const session = await getSession();
+    const sessionUser = session?.user as
+      | { email?: string | null; emailVerified?: boolean }
+      | undefined;
+    const accountEmail = sessionUser?.email || email;
+
+    if (sessionUser && !sessionUser.emailVerified) {
+      await sendAccountVerificationEmail(accountEmail);
+      router.push(`/verify-email?email=${encodeURIComponent(accountEmail)}`);
+      router.refresh();
+      return;
+    }
+
+    router.push(callbackUrl);
+    router.refresh();
+  };
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Validate credentials and resend account verification email if needed.
-      const checkRes = await fetch('/api/auth/login-check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: data.email, password: data.password }),
+      // First, check if 2FA is required
+      const checkRes = await fetch("/api/auth/2fa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "check", email: data.email }),
       });
       const checkData = await checkRes.json();
-
-      if (!checkRes.ok) {
-        setError(checkData.error || 'Authentication failed');
-        return;
-      }
-
-      if (checkData.emailVerified === false) {
-        router.push('/verify-email?email=' + encodeURIComponent(data.email));
-        return;
-      }
 
       if (checkData.requires2FA) {
         // Store credentials and validate + send 2FA code
         setPendingEmail(data.email);
         setPendingPassword(data.password);
         setIsSendingCode(true);
-        
+
         // This now validates credentials FIRST, then sends code if valid
-        const sendRes = await fetch('/api/auth/2fa', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            action: 'send', 
+        const sendRes = await fetch("/api/auth/2fa", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "send",
             email: data.email,
-            password: data.password  // Pass password for validation
+            password: data.password, // Pass password for validation
           }),
         });
         const sendData = await sendRes.json();
-        
+
         if (sendRes.ok) {
           if (sendData.requiresEmailVerification) {
-            setIsSendingCode(false);
-            router.push('/verify-email?email=' + encodeURIComponent(data.email));
+            router.push(
+              `/verify-email?email=${encodeURIComponent(data.email)}`,
+            );
             return;
           }
 
@@ -97,7 +124,7 @@ function LoginForm() {
           setRequires2FA(true);
         } else {
           // Credentials invalid or other error
-          setError(sendData.error || 'Authentication failed');
+          setError(sendData.error || "Authentication failed");
         }
         setIsSendingCode(false);
         setIsLoading(false);
@@ -105,7 +132,7 @@ function LoginForm() {
       }
 
       // No 2FA required, proceed with normal login
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
@@ -113,20 +140,21 @@ function LoginForm() {
 
       if (result?.error) {
         // Map NextAuth errors to user-friendly messages
-        const errorMessage = result.error === 'CredentialsSignin' || result.error === 'Configuration'
-          ? 'Invalid email or password'
-          : result.error;
+        const errorMessage =
+          result.error === "CredentialsSignin" ||
+          result.error === "Configuration"
+            ? "Invalid email or password"
+            : result.error;
         setError(errorMessage);
         return;
       }
 
       if (result?.ok) {
-        router.push(callbackUrl);
-        router.refresh();
+        await handlePostSignIn(data.email);
       }
     } catch (err) {
-      console.error('Login error:', err);
-      setError('An unexpected error occurred. Please try again.');
+      console.error("Login error:", err);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -134,7 +162,7 @@ function LoginForm() {
 
   const handleVerify2FA = async () => {
     if (verificationCode.length !== 6) {
-      setError('Please enter a 6-digit code');
+      setError("Please enter a 6-digit code");
       return;
     }
 
@@ -143,46 +171,47 @@ function LoginForm() {
       setError(null);
 
       // Verify the code
-      const verifyRes = await fetch('/api/auth/2fa', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          action: 'verify', 
-          email: pendingEmail, 
-          code: verificationCode 
+      const verifyRes = await fetch("/api/auth/2fa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "verify",
+          email: pendingEmail,
+          code: verificationCode,
         }),
       });
       const verifyData = await verifyRes.json();
 
       if (!verifyRes.ok) {
-        setError(verifyData.error || 'Verification failed');
+        setError(verifyData.error || "Verification failed");
         setIsVerifying(false);
         return;
       }
 
       // Code verified, now sign in
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         email: pendingEmail,
         password: pendingPassword,
         redirect: false,
       });
 
       if (result?.error) {
-        const errorMessage = result.error === 'CredentialsSignin' || result.error === 'Configuration'
-          ? 'Invalid email or password'
-          : result.error;
+        const errorMessage =
+          result.error === "CredentialsSignin" ||
+          result.error === "Configuration"
+            ? "Invalid email or password"
+            : result.error;
         setError(errorMessage);
         setIsVerifying(false);
         return;
       }
 
       if (result?.ok) {
-        router.push(callbackUrl);
-        router.refresh();
+        await handlePostSignIn(pendingEmail);
       }
     } catch (err) {
-      console.error('2FA verification error:', err);
-      setError('An unexpected error occurred. Please try again.');
+      console.error("2FA verification error:", err);
+      setError("An unexpected error occurred. Please try again.");
       setIsVerifying(false);
     }
   };
@@ -191,24 +220,24 @@ function LoginForm() {
     try {
       setIsSendingCode(true);
       setError(null);
-      
+
       // Resend requires password for re-validation
-      const sendRes = await fetch('/api/auth/2fa', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          action: 'send', 
+      const sendRes = await fetch("/api/auth/2fa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "send",
           email: pendingEmail,
-          password: pendingPassword
+          password: pendingPassword,
         }),
       });
       const sendData = await sendRes.json();
-      
+
       if (!sendRes.ok) {
-        setError(sendData.error || 'Failed to resend code');
+        setError(sendData.error || "Failed to resend code");
       }
     } catch (err) {
-      setError('Failed to resend code');
+      setError("Failed to resend code");
     } finally {
       setIsSendingCode(false);
     }
@@ -216,10 +245,10 @@ function LoginForm() {
 
   const handleBack = () => {
     setRequires2FA(false);
-    setPendingEmail('');
-    setPendingPassword('');
-    setVerificationCode('');
-    setMaskedEmail('');
+    setPendingEmail("");
+    setPendingPassword("");
+    setVerificationCode("");
+    setMaskedEmail("");
     setError(null);
   };
 
@@ -245,7 +274,8 @@ function LoginForm() {
             </h1>
           </div>
           <p className="mt-2 text-[#6b7a90]">
-            A verification code has been sent to <span className="text-white font-medium">{maskedEmail}</span>
+            A verification code has been sent to{" "}
+            <span className="text-white font-medium">{maskedEmail}</span>
           </p>
         </div>
 
@@ -267,7 +297,7 @@ function LoginForm() {
               type="text"
               value={verificationCode}
               onChange={(e) => {
-                const val = e.target.value.replace(/\D/g, '').slice(0, 6);
+                const val = e.target.value.replace(/\D/g, "").slice(0, 6);
                 setVerificationCode(val);
               }}
               placeholder="Enter 6-digit code"
@@ -288,19 +318,19 @@ function LoginForm() {
                 Verifying...
               </>
             ) : (
-              'Verify & Sign In'
+              "Verify & Sign In"
             )}
           </Button>
 
           <div className="text-center">
             <p className="text-sm text-[#6b7a90]">
-              Didn&apos;t receive the code?{' '}
+              Didn&apos;t receive the code?{" "}
               <button
                 onClick={handleResendCode}
                 disabled={isSendingCode}
                 className="text-[#22c55e] hover:underline disabled:opacity-50"
               >
-                {isSendingCode ? 'Sending...' : 'Resend code'}
+                {isSendingCode ? "Sending..." : "Resend code"}
               </button>
             </p>
           </div>
@@ -309,8 +339,9 @@ function LoginForm() {
         {/* Security Notice */}
         <div className="bg-[#1e2733] rounded-lg p-4">
           <p className="text-xs text-[#6b7a90]">
-            <strong className="text-white">Security Notice:</strong> This code expires in 10 minutes. 
-            Never share your verification code with anyone. Our team will never ask for this code.
+            <strong className="text-white">Security Notice:</strong> This code
+            expires in 10 minutes. Never share your verification code with
+            anyone. Our team will never ask for this code.
           </p>
         </div>
       </div>
@@ -345,7 +376,7 @@ function LoginForm() {
           placeholder="Enter your email"
           leftIcon={<Mail className="h-4 w-4" />}
           error={errors.email?.message}
-          {...register('email')}
+          {...register("email")}
         />
 
         <div className="space-y-1.5">
@@ -355,7 +386,7 @@ function LoginForm() {
             placeholder="Enter your password"
             leftIcon={<Lock className="h-4 w-4" />}
             error={errors.password?.message}
-            {...register('password')}
+            {...register("password")}
           />
           <div className="flex justify-end">
             <Link
@@ -373,7 +404,7 @@ function LoginForm() {
           size="lg"
           isLoading={isLoading || isSendingCode}
         >
-          {isSendingCode ? 'Sending verification code...' : 'Sign in'}
+          {isSendingCode ? "Sending verification code..." : "Sign in"}
         </Button>
       </form>
 

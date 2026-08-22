@@ -1,0 +1,16 @@
+extends ../layouts/base.pug
+include ../partials/detail-table.pug
+
+block content
+  h1= title
+  p.subtitle Transaction Update
+  p.greeting Hi #{name},
+  p= message
+  .transaction-box
+    +detailTable(details)
+  .button-container
+    a.button(href=`${appUrl}/dashboard`) View Dashboard
+  .divider
+  p.support-note
+    | Questions about this transaction? Contact our support team at 
+    a(href=`mailto:${supportEmail}`)= supportEmail

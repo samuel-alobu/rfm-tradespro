@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Logo } from "@/components/ui/Logo";
 import { Shield, TrendingUp, BarChart3, Globe } from "lucide-react";
+import { getCopyrightYearRange } from "@/utils";
 
 // ============================================
 // Auth Layout - Professional Split Design
@@ -14,6 +15,8 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const copyrightYearRange = getCopyrightYearRange();
+
   return (
     <div className="min-h-screen flex bg-[#0a0e14]">
       {/* Left Side - Image & Branding */}
@@ -135,7 +138,7 @@ export default function AuthLayout({
         {/* Footer */}
         <div className="p-6 text-center border-t border-[#1e2733]">
           <p className="text-sm text-[#6b7a90]">
-            © {new Date().getFullYear()} RFM TradePro. All rights reserved.
+            © {copyrightYearRange} Oasis MarketPro. All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-4 mt-2">
             <Link

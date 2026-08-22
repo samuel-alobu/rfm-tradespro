@@ -1,0 +1,18 @@
+extends ../layouts/base.pug
+
+block content
+  h1= title
+  p.subtitle Account Update
+  p.greeting Hi #{name},
+  p= message
+  if reason
+    .info-box
+      p
+        strong Reason:
+        |  #{reason}
+  .button-container
+    a.button(href=actionUrl)= actionLabel
+  .divider
+  p.support-note
+    | If you have any questions, please contact our support team at 
+    a(href=`mailto:${supportEmail}`)= supportEmail

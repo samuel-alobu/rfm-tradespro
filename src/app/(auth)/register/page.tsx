@@ -112,7 +112,7 @@ export default function RegisterPage() {
           Create an account
         </h1>
         <p className="mt-2 text-[#6b7a90]">
-          Start your trading journey with RFM TradePro
+          Start your trading journey with Oasis MarketPro. Join thousands of traders and gain access to powerful tools, real-time data, and a supportive community. Sign up now and take your trading to the next level!
         </p>
       </div>
 

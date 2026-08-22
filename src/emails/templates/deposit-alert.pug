@@ -1,0 +1,20 @@
+extends ../layouts/base.pug
+include ../partials/detail-table.pug
+
+block content
+  h1 💰 New Deposit Received
+  p.subtitle Admin Notification
+  .success-box
+    p
+      strong A new deposit has been received on the platform.
+  .amount-box(style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);")
+    p(style="font-size: 14px; color: #065f46; margin: 0 0 8px 0;") Deposit Amount
+    p(style="font-size: 36px; font-weight: 700; color: #065f46; margin: 0;")= amountLabel
+  .transaction-box
+    h3 User Information
+    +detailTable(userDetails)
+  .transaction-box
+    h3 Transaction Details
+    +detailTable(transactionDetails)
+  .button-container
+    a.button(href=`${appUrl}/admin/deposits`) View in Admin Panel

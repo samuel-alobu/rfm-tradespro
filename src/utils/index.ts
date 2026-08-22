@@ -1,5 +1,5 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 // ============================================
 // Class Name Utilities
@@ -21,11 +21,11 @@ export function cn(...inputs: ClassValue[]): string {
  */
 export function formatCurrency(
   value: number,
-  currency: string = 'USD',
-  options?: Intl.NumberFormatOptions
+  currency: string = "USD",
+  options?: Intl.NumberFormatOptions,
 ): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
     currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -37,9 +37,9 @@ export function formatCurrency(
  * Format number with compact notation (1K, 1M, etc.)
  */
 export function formatCompact(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    notation: 'compact',
-    compactDisplay: 'short',
+  return new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    compactDisplay: "short",
     maximumFractionDigits: 2,
   }).format(value);
 }
@@ -50,9 +50,9 @@ export function formatCompact(value: number): string {
 export function formatNumber(
   value: number,
   decimals: number = 2,
-  options?: Intl.NumberFormatOptions
+  options?: Intl.NumberFormatOptions,
 ): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat("en-US", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
     ...options,
@@ -65,10 +65,10 @@ export function formatNumber(
 export function formatPercentage(
   value: number,
   decimals: number = 2,
-  includeSign: boolean = true
+  includeSign: boolean = true,
 ): string {
   const formatted = value.toFixed(decimals);
-  const sign = includeSign && value > 0 ? '+' : '';
+  const sign = includeSign && value > 0 ? "+" : "";
   return `${sign}${formatted}%`;
 }
 
@@ -77,9 +77,9 @@ export function formatPercentage(
  */
 export function formatCryptoAmount(value: number, symbol?: string): string {
   let formatted: string;
-  
+
   if (value === 0) {
-    formatted = '0';
+    formatted = "0";
   } else if (Math.abs(value) < 0.00001) {
     formatted = value.toExponential(4);
   } else if (Math.abs(value) < 1) {
@@ -89,7 +89,7 @@ export function formatCryptoAmount(value: number, symbol?: string): string {
   } else {
     formatted = formatCompact(value);
   }
-  
+
   return symbol ? `${formatted} ${symbol}` : formatted;
 }
 
@@ -100,24 +100,24 @@ export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
   const then = new Date(date);
   const seconds = Math.floor((now.getTime() - then.getTime()) / 1000);
-  
+
   const intervals = [
-    { label: 'year', seconds: 31536000 },
-    { label: 'month', seconds: 2592000 },
-    { label: 'week', seconds: 604800 },
-    { label: 'day', seconds: 86400 },
-    { label: 'hour', seconds: 3600 },
-    { label: 'minute', seconds: 60 },
+    { label: "year", seconds: 31536000 },
+    { label: "month", seconds: 2592000 },
+    { label: "week", seconds: 604800 },
+    { label: "day", seconds: 86400 },
+    { label: "hour", seconds: 3600 },
+    { label: "minute", seconds: 60 },
   ];
-  
+
   for (const interval of intervals) {
     const count = Math.floor(seconds / interval.seconds);
     if (count >= 1) {
-      return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`;
+      return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
     }
   }
-  
-  return 'just now';
+
+  return "just now";
 }
 
 /**
@@ -125,12 +125,12 @@ export function formatRelativeTime(date: Date | string): string {
  */
 export function formatDate(
   date: Date | string,
-  options?: Intl.DateTimeFormatOptions
+  options?: Intl.DateTimeFormatOptions,
 ): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
     ...options,
   }).format(new Date(date));
 }
@@ -140,16 +140,27 @@ export function formatDate(
  */
 export function formatDateTime(
   date: Date | string,
-  options?: Intl.DateTimeFormatOptions
+  options?: Intl.DateTimeFormatOptions,
 ): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
     ...options,
   }).format(new Date(date));
+}
+
+/**
+ * Format copyright year range starting from a fixed launch year.
+ */
+export function getCopyrightYearRange(startYear: number = 2019): string {
+  const currentYear = new Date().getFullYear();
+
+  return startYear === currentYear
+    ? `${currentYear}`
+    : `${startYear} - ${currentYear}`;
 }
 
 // ============================================
@@ -172,20 +183,20 @@ export function validatePassword(password: string): {
   errors: string[];
 } {
   const errors: string[] = [];
-  
+
   if (password.length < 8) {
-    errors.push('Password must be at least 8 characters');
+    errors.push("Password must be at least 8 characters");
   }
   if (!/[A-Z]/.test(password)) {
-    errors.push('Password must contain an uppercase letter');
+    errors.push("Password must contain an uppercase letter");
   }
   if (!/[a-z]/.test(password)) {
-    errors.push('Password must contain a lowercase letter');
+    errors.push("Password must contain a lowercase letter");
   }
   if (!/[0-9]/.test(password)) {
-    errors.push('Password must contain a number');
+    errors.push("Password must contain a number");
   }
-  
+
   return {
     isValid: errors.length === 0,
     errors,
@@ -197,11 +208,13 @@ export function validatePassword(password: string): {
  */
 export function isValidWalletAddress(address: string, type: string): boolean {
   switch (type) {
-    case 'ethereum':
+    case "ethereum":
       return /^0x[a-fA-F0-9]{40}$/.test(address);
-    case 'bitcoin':
-      return /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$|^bc1[a-z0-9]{39,59}$/.test(address);
-    case 'solana':
+    case "bitcoin":
+      return /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$|^bc1[a-z0-9]{39,59}$/.test(
+        address,
+      );
+    case "solana":
       return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address);
     default:
       return address.length > 20;
@@ -223,7 +236,11 @@ export function truncate(str: string, length: number): string {
 /**
  * Truncate wallet address (show first and last chars)
  */
-export function truncateAddress(address: string, start: number = 6, end: number = 4): string {
+export function truncateAddress(
+  address: string,
+  start: number = 6,
+  end: number = 4,
+): string {
   if (address.length <= start + end) return address;
   return `${address.slice(0, start)}...${address.slice(-end)}`;
 }
@@ -232,8 +249,9 @@ export function truncateAddress(address: string, start: number = 6, end: number 
  * Generate random string
  */
 export function generateId(length: number = 12): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
@@ -243,7 +261,7 @@ export function generateId(length: number = 12): string {
 /**
  * Generate reference number
  */
-export function generateReference(prefix: string = 'TXN'): string {
+export function generateReference(prefix: string = "TXN"): string {
   const timestamp = Date.now().toString(36).toUpperCase();
   const random = Math.random().toString(36).substring(2, 8).toUpperCase();
   return `${prefix}-${timestamp}-${random}`;
@@ -261,9 +279,9 @@ export function capitalize(str: string): string {
  */
 export function snakeToTitle(str: string): string {
   return str
-    .split('_')
+    .split("_")
     .map((word) => capitalize(word))
-    .join(' ');
+    .join(" ");
 }
 
 // ============================================
@@ -289,7 +307,7 @@ export function isEmpty(obj: object): boolean {
  */
 export function pick<T extends object, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Pick<T, K> {
   const result = {} as Pick<T, K>;
   keys.forEach((key) => {
@@ -305,7 +323,7 @@ export function pick<T extends object, K extends keyof T>(
  */
 export function omit<T extends object, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Omit<T, K> {
   const result = { ...obj };
   keys.forEach((key) => {
@@ -329,14 +347,17 @@ export function unique<T>(arr: T[]): T[] {
  * Group array by key
  */
 export function groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {
-  return arr.reduce((acc, item) => {
-    const groupKey = String(item[key]);
-    if (!acc[groupKey]) {
-      acc[groupKey] = [];
-    }
-    acc[groupKey].push(item);
-    return acc;
-  }, {} as Record<string, T[]>);
+  return arr.reduce(
+    (acc, item) => {
+      const groupKey = String(item[key]);
+      if (!acc[groupKey]) {
+        acc[groupKey] = [];
+      }
+      acc[groupKey].push(item);
+      return acc;
+    },
+    {} as Record<string, T[]>,
+  );
 }
 
 /**
@@ -345,14 +366,14 @@ export function groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {
 export function sortBy<T>(
   arr: T[],
   key: keyof T,
-  order: 'asc' | 'desc' = 'asc'
+  order: "asc" | "desc" = "asc",
 ): T[] {
   return [...arr].sort((a, b) => {
     const aVal = a[key];
     const bVal = b[key];
-    
-    if (aVal < bVal) return order === 'asc' ? -1 : 1;
-    if (aVal > bVal) return order === 'asc' ? 1 : -1;
+
+    if (aVal < bVal) return order === "asc" ? -1 : 1;
+    if (aVal > bVal) return order === "asc" ? 1 : -1;
     return 0;
   });
 }
@@ -373,10 +394,10 @@ export function sleep(ms: number): Promise<void> {
  */
 export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  
+
   return (...args: Parameters<T>) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -392,10 +413,10 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
  */
 export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
@@ -415,69 +436,71 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
  * Get color for price change
  */
 export function getPriceChangeColor(change: number): string {
-  if (change > 0) return 'text-[var(--color-bullish)]';
-  if (change < 0) return 'text-[var(--color-bearish)]';
-  return 'text-[var(--color-neutral)]';
+  if (change > 0) return "text-[var(--color-bullish)]";
+  if (change < 0) return "text-[var(--color-bearish)]";
+  return "text-[var(--color-neutral)]";
 }
 
 /**
  * Get background color for price change
  */
 export function getPriceChangeBgColor(change: number): string {
-  if (change > 0) return 'bg-[var(--color-success-bg)]';
-  if (change < 0) return 'bg-[var(--color-error-bg)]';
-  return 'bg-[var(--color-surface-elevated)]';
+  if (change > 0) return "bg-[var(--color-success-bg)]";
+  if (change < 0) return "bg-[var(--color-error-bg)]";
+  return "bg-[var(--color-surface-elevated)]";
 }
 
 /**
  * Get status color
  */
-export function getStatusColor(
-  status: string
-): { bg: string; text: string; dot: string } {
+export function getStatusColor(status: string): {
+  bg: string;
+  text: string;
+  dot: string;
+} {
   const statusMap: Record<string, { bg: string; text: string; dot: string }> = {
     pending: {
-      bg: 'bg-[var(--color-warning-bg)]',
-      text: 'text-[var(--color-warning)]',
-      dot: 'bg-[var(--color-warning)]',
+      bg: "bg-[var(--color-warning-bg)]",
+      text: "text-[var(--color-warning)]",
+      dot: "bg-[var(--color-warning)]",
     },
     processing: {
-      bg: 'bg-[var(--color-info-bg)]',
-      text: 'text-[var(--color-info)]',
-      dot: 'bg-[var(--color-info)]',
+      bg: "bg-[var(--color-info-bg)]",
+      text: "text-[var(--color-info)]",
+      dot: "bg-[var(--color-info)]",
     },
     completed: {
-      bg: 'bg-[var(--color-success-bg)]',
-      text: 'text-[var(--color-success)]',
-      dot: 'bg-[var(--color-success)]',
+      bg: "bg-[var(--color-success-bg)]",
+      text: "text-[var(--color-success)]",
+      dot: "bg-[var(--color-success)]",
     },
     active: {
-      bg: 'bg-[var(--color-success-bg)]',
-      text: 'text-[var(--color-success)]',
-      dot: 'bg-[var(--color-success)]',
+      bg: "bg-[var(--color-success-bg)]",
+      text: "text-[var(--color-success)]",
+      dot: "bg-[var(--color-success)]",
     },
     failed: {
-      bg: 'bg-[var(--color-error-bg)]',
-      text: 'text-[var(--color-error)]',
-      dot: 'bg-[var(--color-error)]',
+      bg: "bg-[var(--color-error-bg)]",
+      text: "text-[var(--color-error)]",
+      dot: "bg-[var(--color-error)]",
     },
     rejected: {
-      bg: 'bg-[var(--color-error-bg)]',
-      text: 'text-[var(--color-error)]',
-      dot: 'bg-[var(--color-error)]',
+      bg: "bg-[var(--color-error-bg)]",
+      text: "text-[var(--color-error)]",
+      dot: "bg-[var(--color-error)]",
     },
     cancelled: {
-      bg: 'bg-[var(--color-surface-elevated)]',
-      text: 'text-[var(--color-text-muted)]',
-      dot: 'bg-[var(--color-text-muted)]',
+      bg: "bg-[var(--color-surface-elevated)]",
+      text: "text-[var(--color-text-muted)]",
+      dot: "bg-[var(--color-text-muted)]",
     },
   };
-  
+
   return (
     statusMap[status.toLowerCase()] || {
-      bg: 'bg-[var(--color-surface-elevated)]',
-      text: 'text-[var(--color-text-secondary)]',
-      dot: 'bg-[var(--color-text-secondary)]',
+      bg: "bg-[var(--color-surface-elevated)]",
+      text: "text-[var(--color-text-secondary)]",
+      dot: "bg-[var(--color-text-secondary)]",
     }
   );
 }
@@ -490,8 +513,8 @@ export function getStatusColor(
  * Get item from localStorage with type safety
  */
 export function getStorageItem<T>(key: string, defaultValue: T): T {
-  if (typeof window === 'undefined') return defaultValue;
-  
+  if (typeof window === "undefined") return defaultValue;
+
   try {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : defaultValue;
@@ -504,12 +527,12 @@ export function getStorageItem<T>(key: string, defaultValue: T): T {
  * Set item in localStorage
  */
 export function setStorageItem<T>(key: string, value: T): void {
-  if (typeof window === 'undefined') return;
-  
+  if (typeof window === "undefined") return;
+
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    console.error('Error saving to localStorage:', error);
+    console.error("Error saving to localStorage:", error);
   }
 }
 
@@ -517,7 +540,7 @@ export function setStorageItem<T>(key: string, value: T): void {
  * Remove item from localStorage
  */
 export function removeStorageItem(key: string): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   localStorage.removeItem(key);
 }
 
@@ -530,16 +553,16 @@ export function removeStorageItem(key: string): void {
  */
 export function buildUrl(
   base: string,
-  params: Record<string, string | number | boolean | undefined>
+  params: Record<string, string | number | boolean | undefined>,
 ): string {
   const url = new URL(base, window.location.origin);
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined) {
       url.searchParams.set(key, String(value));
     }
   });
-  
+
   return url.toString();
 }
 
@@ -549,11 +572,11 @@ export function buildUrl(
 export function parseQueryParams(url: string): Record<string, string> {
   const params = new URLSearchParams(new URL(url).search);
   const result: Record<string, string> = {};
-  
+
   params.forEach((value, key) => {
     result[key] = value;
   });
-  
+
   return result;
 }
 
@@ -570,4 +593,4 @@ export {
   tokenToUsd,
   formatTokenAmount,
   getAllCryptoPrices,
-} from './cryptoPrices';
+} from "./cryptoPrices";

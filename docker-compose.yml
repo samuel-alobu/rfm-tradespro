@@ -10,13 +10,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: elite-pro-capital
+    container_name: rfm-trades-pro
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - MONGODB_URI=mongodb://mongo:27017/elite-pro-capital
+      - MONGODB_URI=mongodb://mongo:27017/rfm-trades-pro
       - NEXTAUTH_URL=http://localhost:3000
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - RESEND_API_KEY=${RESEND_API_KEY}
@@ -34,7 +34,7 @@ services:
   # MongoDB Database
   mongo:
     image: mongo:7
-    container_name: elite-pro-capital-db
+    container_name: rfm-trades-pro-db
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -42,7 +42,7 @@ services:
       - mongo-data:/data/db
       - mongo-config:/data/configdb
     environment:
-      - MONGO_INITDB_DATABASE=elite-pro-capital
+      - MONGO_INITDB_DATABASE=rfm-trades-pro
     networks:
       - app-network
     healthcheck:
@@ -55,7 +55,7 @@ services:
   # Redis (Optional - for caching and rate limiting)
   redis:
     image: redis:7-alpine
-    container_name: elite-pro-capital-redis
+    container_name: rfm-trades-pro-redis
     restart: unless-stopped
     ports:
       - "6379:6379"

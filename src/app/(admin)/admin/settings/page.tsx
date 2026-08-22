@@ -347,7 +347,7 @@ export default function AdminSettingsPage() {
                     value={settings.depositAlertEmail}
                     onChange={(e) => updateSetting('depositAlertEmail', e.target.value)}
                     disabled={!isSuperAdmin}
-                    placeholder="admin@rfmtradepro.com"
+                    placeholder="admin@oasismarketpro.com"
                     className={cn(
                       'w-full px-4 py-3 bg-[var(--color-surface-elevated)] border border-[var(--color-border)] rounded-xl text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]',
                       !isSuperAdmin && 'opacity-50 cursor-not-allowed'

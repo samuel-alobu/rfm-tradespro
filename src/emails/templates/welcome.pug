@@ -1,0 +1,29 @@
+extends ../layouts/base.pug
+
+block content
+  h1 Welcome to #{appName}
+  p.subtitle Your account is now active
+  p.greeting Hi #{name},
+  p Congratulations! Your email has been verified and your account is now fully activated. You're all set to begin your trading journey with us.
+  .success-box
+    p
+      strong Account Status:
+      |  Verified and Active
+  p
+    strong Here's what you can do next:
+  ul.features-list
+    li Make your first deposit to fund your account
+    li Explore live markets and discover trading opportunities
+    li Follow expert traders with our Copy Trading feature
+    li Invest in tokenized real estate properties
+    li Stake your crypto assets for passive income
+  .button-container
+    a.button(href=`${appUrl}/dashboard`) Go to Dashboard
+  .divider
+  .info-box
+    p
+      strong Need assistance?
+      |  Our support team is available 24/7 to help you get started. Don't hesitate to reach out if you have any questions.
+  p.support-note
+    | Contact us anytime at 
+    a(href=`mailto:${supportEmail}`)= supportEmail

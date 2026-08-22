@@ -1,137 +1,142 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // React Compiler
-  reactCompiler: false,
+  // Enable standalone output for Docker deployment
+  output: 'standalone',
 
+  // Pug email templates are loaded dynamically at runtime, so include them
+  // explicitly in the standalone server trace.
+  outputFileTracingIncludes: {
+    '/*': ['./src/emails/**/*.pug'],
+  },
+  
+  // Enable React Compiler for automatic memoization (stable in Next.js 16)
+  reactCompiler: false, // Enable if needed, adds build overhead
+  
   // Image optimization configuration
   images: {
     remotePatterns: [
-      // Cloudinary
+      // Cloudinary (for uploaded images/documents)
       {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
       },
-
       // Crypto logos
       {
-        protocol: "https",
-        hostname: "assets.coingecko.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'assets.coingecko.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "coin-images.coingecko.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'coin-images.coingecko.com',
+        pathname: '/**',
       },
-
       // Stock logos
       {
-        protocol: "https",
-        hostname: "assets.parqet.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'assets.parqet.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "logo.clearbit.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'logo.clearbit.com',
+        pathname: '/**',
       },
-
       // General images
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "randomuser.me",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'randomuser.me',
+        pathname: '/**',
       },
-
-      // Wallet logos
+      // Wallet logos - Primary source
       {
-        protocol: "https",
-        hostname: "altcoinsbox.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'altcoinsbox.com',
+        pathname: '/**',
+      },
+      // GitHub raw content (wallet logos)
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/**',
+      },
+      // Fallback wallet logo sources
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'cryptologos.cc',
+        pathname: '/**',
       },
+      // Google favicon service for stock logos
       {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cryptologos.cc",
-        pathname: "/**",
-      },
-
-      // Google favicon service
-      {
-        protocol: "https",
-        hostname: "www.google.com",
-        pathname: "/s2/favicons/**",
+        protocol: 'https',
+        hostname: 'www.google.com',
+        pathname: '/s2/favicons/**',
       },
     ],
   },
 
-  // Environment variables exposed to browser
+  // Environment variables exposed to the browser
   env: {
-    APP_NAME: "RFM TradePro",
-    APP_URL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+    APP_NAME: 'Oasis MarketPro',
+    APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
 
-  // Pug templates are read from disk by server routes/components at runtime.
-  outputFileTracingIncludes: {
-    "/*": ["./src/templates/**/*.pug", "./src/emails/**/*.pug"],
-  },
-
+  // Experimental features
   experimental: {
+    // Enable server actions
     serverActions: {
-      bodySizeLimit: "2mb",
+      bodySizeLimit: '2mb',
     },
   },
 
+  // Redirects
   async redirects() {
     return [
       {
-        source: "/home",
-        destination: "/",
+        source: '/home',
+        destination: '/',
         permanent: true,
       },
     ];
   },
 
+  // Headers for security
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "X-Frame-Options",
-            value: "DENY",
+            key: 'X-Frame-Options',
+            value: 'DENY',
           },
           {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
-            key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
           },
           {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
           },
         ],
       },

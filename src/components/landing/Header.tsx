@@ -13,9 +13,9 @@ import { cn } from '@/utils';
 // ============================================
 
 const navLinks = [
-  { href: '/about', label: 'About us' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/why-rfm-tradepro', label: 'Why us' },
+  { href: "/about", label: "About us" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/why-oasis-marketpro", label: "Why us" },
 ];
 
 // ============================================

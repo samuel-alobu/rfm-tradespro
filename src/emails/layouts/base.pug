@@ -4,55 +4,79 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    title= typeof APP_NAME !== 'undefined' ? APP_NAME : 'RFM TradePro'
+    title= appName
     style.
       body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
       table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+      img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
       body {
-        margin: 0;
-        padding: 0;
-        width: 100% !important;
-        min-width: 100%;
-        background-color: #f0f2f5;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f2f5;
+        width: 100% !important;
+        min-width: 100%;
       }
       .email-wrapper { width: 100%; background-color: #f0f2f5; padding: 40px 0; }
       .email-container { max-width: 600px; margin: 0 auto; }
       .header {
-        background: linear-gradient(135deg, #0a0e14 0%, #151c24 100%);
+        background: linear-gradient(135deg, #{brandBgDark} 0%, #151c24 100%);
         border-radius: 16px 16px 0 0;
         padding: 40px 40px 30px;
         text-align: center;
       }
+      .logo-container { display: inline-flex; align-items: center; justify-content: center; gap: 12px; }
+      .logo-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(135deg, #{brandGreen} 0%, #{brandGreenDark} 100%);
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+      }
       .logo-text { font-size: 26px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; }
       .tagline { color: #6b7a90; font-size: 14px; margin-top: 8px; }
       .main-content { background-color: #ffffff; padding: 40px; }
-      h1 { font-size: 26px; font-weight: 700; color: #1a1a1a; margin: 0 0 8px; text-align: center; line-height: 1.3; }
-      .subtitle { font-size: 16px; color: #6b7a90; margin: 0 0 30px; text-align: center; }
-      p { font-size: 16px; color: #4a4a4a; margin: 0 0 16px; line-height: 1.7; }
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0 0 8px 0;
+        text-align: center;
+        line-height: 1.3;
+      }
+      h3 { font-size: 16px; font-weight: 600; color: #1a1a1a; margin: 0 0 16px 0; }
+      .subtitle { font-size: 16px; color: #6b7a90; margin: 0 0 30px 0; text-align: center; }
+      p { font-size: 16px; color: #4a4a4a; margin: 0 0 16px 0; line-height: 1.7; }
       .greeting { font-size: 16px; color: #1a1a1a; margin-bottom: 20px; }
       .button-container { text-align: center; margin: 32px 0; }
       .button {
         display: inline-block;
         padding: 16px 40px;
-        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        background: linear-gradient(135deg, #{brandGreen} 0%, #{brandGreenDark} 100%);
         color: #ffffff !important;
         text-decoration: none;
         border-radius: 10px;
         font-weight: 600;
         font-size: 16px;
         text-align: center;
+        box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
       }
-      .link-box {
-        background-color: #f8fafc;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 16px 0;
-        word-break: break-all;
+      .link-box { background-color: #f8fafc; border-radius: 8px; padding: 16px; margin: 16px 0; word-break: break-all; }
+      .link-box p { font-size: 12px; color: #6b7a90; margin: 0 0 8px 0; }
+      .link-box a { font-size: 13px; color: #{brandGreen}; text-decoration: none; word-break: break-all; }
+      .info-box {
+        background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+        border-left: 4px solid #3b82f6;
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin: 24px 0;
       }
-      .link-box p { font-size: 12px; color: #6b7a90; margin: 0 0 8px; }
-      .link-box a { font-size: 13px; color: #22c55e; text-decoration: none; word-break: break-all; }
+      .info-box p { color: #1e40af; margin: 0; font-size: 14px; line-height: 1.6; }
       .warning-box {
         background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
         border-left: 4px solid #f59e0b;
@@ -61,7 +85,24 @@ html(lang="en")
         margin: 24px 0;
       }
       .warning-box p { color: #92400e; margin: 0; font-size: 14px; line-height: 1.6; }
-      .divider { height: 1px; background: linear-gradient(90deg, transparent, #e2e8f0, transparent); margin: 24px 0; }
+      .success-box {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        border-left: 4px solid #{brandGreen};
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin: 24px 0;
+      }
+      .success-box p { color: #065f46; margin: 0; font-size: 14px; line-height: 1.6; }
+      .amount-box { border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+      .amount-box p { margin: 0; }
+      .transaction-box {
+        background: linear-gradient(135deg, #f8fafc 0%, #f0f2f5 100%);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 24px 0;
+      }
+      .features-list { margin: 24px 0; padding: 0 0 0 20px; list-style: disc; }
+      .features-list li { padding: 8px 0; color: #4a4a4a; font-size: 15px; }
       .footer {
         background-color: #f8fafc;
         border-radius: 0 0 16px 16px;
@@ -69,7 +110,13 @@ html(lang="en")
         text-align: center;
         border-top: 1px solid #e2e8f0;
       }
+      .footer-links { margin-bottom: 20px; }
+      .footer-links a { color: #{brandGreen}; text-decoration: none; font-size: 14px; margin: 0 12px; }
       .footer-text { font-size: 13px; color: #9ca3af; margin: 0; }
+      .footer-address { font-size: 12px; color: #9ca3af; margin-top: 16px; line-height: 1.6; }
+      .divider { height: 1px; background: linear-gradient(90deg, transparent, #e2e8f0, transparent); margin: 24px 0; }
+      .support-note { font-size: 14px; color: #6b7a90; }
+      .support-note a { color: #{brandGreen}; }
       @media only screen and (max-width: 600px) {
         .email-wrapper { padding: 20px 10px !important; }
         .header { padding: 30px 24px 24px !important; border-radius: 12px 12px 0 0 !important; }
@@ -80,14 +127,11 @@ html(lang="en")
         .logo-text { font-size: 22px !important; }
       }
   body
-    - const appName = typeof APP_NAME !== 'undefined' ? APP_NAME : 'RFM TradePro'
+    if preheader
+      span(style="display:none;font-size:1px;color:#fff;max-height:0;overflow:hidden;mso-hide:all;")= preheader
     .email-wrapper
       .email-container
-        .header
-          span.logo-text= appName
-          p.tagline Professional Trading Platform
+        include ../partials/header.pug
         .main-content
           block content
-        .footer
-          p.footer-text #{new Date().getFullYear()} #{appName}. All rights reserved.
-          p.footer-text This email was sent because you have an account with #{appName}.
+        include ../partials/footer.pug

@@ -1,0 +1,17 @@
+extends ../layouts/base.pug
+
+block content
+  h1 Verification Code
+  p.subtitle Secure Authentication
+  p.greeting Hi #{name},
+  p A sign-in attempt was detected for your #{appName} account. Use the verification code below to complete your login:
+  .code-box(style=`background-color: ${brandBgDark}; border: 2px solid ${brandGreen}; border-radius: 10px; padding: 24px; text-align: center; margin: 28px 0;`)
+    span(style=`font-size: 36px; font-weight: 700; letter-spacing: 8px; color: ${brandGreen}; font-family: 'Courier New', monospace;`)= code
+  .warning-box
+    p
+      strong This code expires in 10 minutes.
+      |  If you did not attempt to sign in, please secure your account immediately by changing your password.
+  .info-box
+    p
+      strong Security Tip:
+      |  #{appName} will never ask for your verification code via phone, SMS, or social media. Only enter this code on the official #{appName} website.

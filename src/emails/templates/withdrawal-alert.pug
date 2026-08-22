@@ -1,0 +1,20 @@
+extends ../layouts/base.pug
+include ../partials/detail-table.pug
+
+block content
+  h1 💸 New Withdrawal Request
+  p.subtitle Admin Notification - Action Required
+  .warning-box
+    p
+      strong A new withdrawal request requires your attention.
+  .amount-box(style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);")
+    p(style="font-size: 14px; color: #991b1b; margin: 0 0 8px 0;") Withdrawal Amount
+    p(style="font-size: 36px; font-weight: 700; color: #991b1b; margin: 0;") -#{amountLabel}
+  .transaction-box
+    h3 User Information
+    +detailTable(userDetails)
+  .transaction-box
+    h3 Withdrawal Details
+    +detailTable(withdrawalDetails)
+  .button-container
+    a.button(href=`${appUrl}/admin/withdrawals`) Review in Admin Panel

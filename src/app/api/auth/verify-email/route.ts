@@ -113,7 +113,15 @@ export async function GET(request: Request) {
 
     // Send verification email
     const { sendVerificationEmail } = await import('@/lib/email');
-    await sendVerificationEmail(user.email, user.firstName, emailVerificationToken);
+    const emailResult = await sendVerificationEmail(user.email, user.firstName, emailVerificationToken);
+
+    if (!emailResult.success) {
+      console.error('Failed to send verification email:', emailResult.error);
+      return NextResponse.json(
+        { success: false, error: 'Failed to send verification email' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: 'Verification email sent successfully.' },

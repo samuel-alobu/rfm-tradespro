@@ -55,7 +55,6 @@ export interface IUser extends Document {
   twoFactorSecret?: string;
   twoFactorCode?: string;
   twoFactorExpires?: Date;
-  twoFactorVerifiedUntil?: Date;
   deleteAccountCode?: string;
   deleteAccountExpires?: Date;
   deletedAt?: Date;
@@ -271,7 +270,6 @@ const UserSchema = new Schema<IUser>(
     twoFactorSecret: String,
     twoFactorCode: String,
     twoFactorExpires: Date,
-    twoFactorVerifiedUntil: Date,
     deleteAccountCode: String,
     deleteAccountExpires: Date,
     deletedAt: Date,
@@ -297,15 +295,8 @@ const UserSchema = new Schema<IUser>(
       transform: (_doc, ret: Record<string, unknown>) => {
         delete ret.password;
         delete ret.emailVerificationToken;
-        delete ret.emailVerificationExpires;
         delete ret.passwordResetToken;
-        delete ret.passwordResetExpires;
         delete ret.twoFactorSecret;
-        delete ret.twoFactorCode;
-        delete ret.twoFactorExpires;
-        delete ret.twoFactorVerifiedUntil;
-        delete ret.deleteAccountCode;
-        delete ret.deleteAccountExpires;
         delete ret.__v;
         return ret;
       },

@@ -1,0 +1,20 @@
+extends ../layouts/base.pug
+include ../partials/detail-table.pug
+
+block content
+  h1 New Login Detected
+  p.subtitle Security Alert
+  p.greeting Hi #{name},
+  p We detected a new login to your #{appName} account. If this was you, you can safely ignore this email.
+  .transaction-box
+    +detailTable(details)
+  .warning-box
+    p
+      strong Wasn't you?
+      |  If you didn't log in, please immediately reset your password and contact our support team.
+  .button-container
+    a.button(href=`${appUrl}/forgot-password`) Reset Password
+  .divider
+  p.support-note
+    | Contact our support team at 
+    a(href=`mailto:${supportEmail}`)= supportEmail

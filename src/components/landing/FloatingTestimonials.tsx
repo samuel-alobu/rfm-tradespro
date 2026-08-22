@@ -63,7 +63,7 @@ const testimonials: Testimonial[] = [
     role: 'User',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     title: 'Excellent platform',
-    content: "RFM TradePro has everything you could ask for, I'm super happy it has been recommended to me as my first broker",
+    content: "Oasis MarketPro has everything you could ask for, I'm super happy it has been recommended to me as my first broker",
     rating: 5,
   },
   {
@@ -264,7 +264,7 @@ export const FloatingTestimonials: React.FC<FloatingTestimonialsProps> = ({
           ambitious earners
         </h2>
         <p className="text-lg text-white/60 max-w-2xl mx-auto">
-          Thousands of forward-thinking users rely on RFM TradePro everyday to
+          Thousands of forward-thinking users rely on Oasis MarketPro everyday to
           turbo-charge their financial operations
         </p>
       </motion.div>

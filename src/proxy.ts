@@ -47,7 +47,7 @@ export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const isAdmin = req.auth?.user?.role === 'admin' || req.auth?.user?.role === 'super_admin';
-  const user = req.auth?.user as { emailVerified?: boolean; status?: string } | undefined;
+  const user = req.auth?.user as { email?: string; emailVerified?: boolean; status?: string } | undefined;
 
   const pathname = nextUrl.pathname;
 
@@ -103,7 +103,12 @@ export default auth(async (req) => {
 
     // Check if email is verified
     if (!user?.emailVerified) {
-      return NextResponse.redirect(new URL('/verify-email?pending=true', nextUrl));
+      const verifyUrl = new URL('/verify-email', nextUrl);
+      verifyUrl.searchParams.set('pending', 'true');
+      if (user?.email) {
+        verifyUrl.searchParams.set('email', user.email);
+      }
+      return NextResponse.redirect(verifyUrl);
     }
 
     // Check if account is active
