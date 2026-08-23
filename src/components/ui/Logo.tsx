@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { cn } from '@/utils';
+import React from "react";
+import Link from "next/link";
+import { cn } from "@/utils";
 
 // ============================================
 // Logo Component - RFM Trades Pro
@@ -11,36 +11,37 @@ import { cn } from '@/utils';
 // ============================================
 
 export interface LogoProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   showText?: boolean;
   className?: string;
   href?: string;
-  variant?: 'default' | 'light';
+  variant?: "default" | "light";
 }
 
 export const Logo: React.FC<LogoProps> = ({
-  size = 'md',
+  size = "md",
   showText = true,
   className,
-  href = '/',
-  variant = 'default',
+  href = "/",
+  variant = "default",
 }) => {
   const sizes = {
     sm: {
-      icon: 'h-8 w-8',
-      text: 'text-sm',
+      icon: "h-8 w-8",
+      text: "text-sm",
     },
     md: {
-      icon: 'h-10 w-10',
-      text: 'text-lg',
+      icon: "h-10 w-10",
+      text: "text-lg",
     },
     lg: {
-      icon: 'h-12 w-12',
-      text: 'text-xl',
+      icon: "h-12 w-12",
+      text: "text-xl",
     },
   };
 
-  const textColor = variant === 'light' ? 'text-white' : 'text-[var(--color-text-primary)]';
+  const textColor =
+    variant === "light" ? "text-white" : "text-[var(--color-text-primary)]";
 
   const LogoContent = () => (
     <div className={cn("flex items-center gap-2.5", className)}>
@@ -53,86 +54,65 @@ export const Logo: React.FC<LogoProps> = ({
         )}
       >
         <svg
-          viewBox="0 0 612 612"
+          viewBox="0 0 40 40"
           fill="none"
           className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <defs>
-            <linearGradient
-              id="oasisBarGradient"
-              x1="306"
-              y1="128"
-              x2="306"
-              y2="466"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" stopColor="#0EA5E9" />
-              <stop offset="0.45" stopColor="#0877B8" />
-              <stop offset="1" stopColor="#034B73" />
-            </linearGradient>
-          </defs>
+          {/* Background - Rounded square with green gradient */}
+          <rect width="40" height="40" rx="8" fill="url(#rfm-bg-gradient)" />
 
-          {/* Bottom swoosh */}
+          {/* Trading bars - ascending pattern */}
+          <rect
+            x="8"
+            y="22"
+            width="5"
+            height="10"
+            rx="1.5"
+            fill="white"
+            opacity="0.6"
+          />
+          <rect
+            x="15"
+            y="17"
+            width="5"
+            height="15"
+            rx="1.5"
+            fill="white"
+            opacity="0.8"
+          />
+          <rect x="22" y="12" width="5" height="20" rx="1.5" fill="white" />
+
+          {/* Upward arrow - growth indicator */}
           <path
-            d="M86 481C187 452 337 438 505 479C383 459 226 458 86 481Z"
-            fill="#086497"
+            d="M29 14L33 8L37 14"
+            stroke="white"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
           />
           <path
-            d="M86 481C214 459 386 458 505 479"
-            stroke="#0EA5E9"
-            strokeWidth="3"
+            d="M33 8V20"
+            stroke="white"
+            strokeWidth="2.5"
             strokeLinecap="round"
           />
 
-          {/* Growth bars */}
-          <path
-            d="M124 388L162 353V462H124V388Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M175 342L214 306V457H175V342Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M227 359L266 322V454H227V359Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M278 310L318 256V452H278V310Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M330 251L370 283V454H330V251Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M382 284L421 246V462H382V284Z"
-            fill="url(#oasisBarGradient)"
-          />
-          <path
-            d="M435 231L474 193V470H435V231Z"
-            fill="url(#oasisBarGradient)"
-          />
-
-          {/* Trend line */}
-          <path
-            d="M104 408L213 318L249 348L334 226L379 261L483 158"
-            stroke="#0B6FA9"
-            strokeWidth="24"
-            strokeLinejoin="miter"
-            strokeLinecap="square"
-          />
-          <path
-            d="M104 408L213 318L249 348L334 226L379 261L483 158"
-            stroke="#0EA5E9"
-            strokeWidth="12"
-            strokeLinejoin="miter"
-            strokeLinecap="square"
-          />
-
-          {/* Arrow head */}
-          <path d="M449 140L509 130L495 190L483 158L449 140Z" fill="#0EA5E9" />
+          <defs>
+            <linearGradient
+              id="rfm-bg-gradient"
+              x1="0"
+              y1="0"
+              x2="40"
+              y2="40"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#22c55e" />
+              <stop offset="0.5" stopColor="#16a34a" />
+              <stop offset="1" stopColor="#15803d" />
+            </linearGradient>
+          </defs>
         </svg>
       </div>
 
@@ -140,12 +120,12 @@ export const Logo: React.FC<LogoProps> = ({
       {showText && (
         <span
           className={cn(
-            "font-extrabold tracking-tight",
+            "font-bold tracking-tight",
             textColor,
             sizes[size].text,
           )}
         >
-          RFM <span className="text-sky-500">Trades Pro</span>
+          RFM Trades Pro
         </span>
       )}
     </div>
@@ -153,7 +133,10 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (href) {
     return (
-      <Link href={href} className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] rounded-lg">
+      <Link
+        href={href}
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] rounded-lg"
+      >
         <LogoContent />
       </Link>
     );
@@ -167,16 +150,19 @@ export const Logo: React.FC<LogoProps> = ({
 // ============================================
 
 export interface LogoIconProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
 }
 
-export const LogoIcon: React.FC<LogoIconProps> = ({ size = 'md', className }) => {
+export const LogoIcon: React.FC<LogoIconProps> = ({
+  size = "md",
+  className,
+}) => {
   const sizes = {
-    sm: { container: 'h-8 w-8' },
-    md: { container: 'h-10 w-10' },
-    lg: { container: 'h-12 w-12' },
-    xl: { container: 'h-16 w-16' },
+    sm: { container: "h-8 w-8" },
+    md: { container: "h-10 w-10" },
+    lg: { container: "h-12 w-12" },
+    xl: { container: "h-16 w-16" },
   };
 
   return (
@@ -188,65 +174,64 @@ export const LogoIcon: React.FC<LogoIconProps> = ({ size = 'md', className }) =>
       )}
     >
       <svg
-        viewBox="0 0 612 612"
+        viewBox="0 0 40 40"
         fill="none"
         className="w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
-          <linearGradient
-            id="oasisBarGradient"
-            x1="306"
-            y1="128"
-            x2="306"
-            y2="466"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor="#0EA5E9" />
-            <stop offset="0.45" stopColor="#0877B8" />
-            <stop offset="1" stopColor="#034B73" />
-          </linearGradient>
-        </defs>
+        <rect width="40" height="40" rx="8" fill="url(#rfm-icon-bg-gradient)" />
 
-        {/* Bottom swoosh */}
+        {/* Trading bars */}
+        <rect
+          x="8"
+          y="22"
+          width="5"
+          height="10"
+          rx="1.5"
+          fill="white"
+          opacity="0.6"
+        />
+        <rect
+          x="15"
+          y="17"
+          width="5"
+          height="15"
+          rx="1.5"
+          fill="white"
+          opacity="0.8"
+        />
+        <rect x="22" y="12" width="5" height="20" rx="1.5" fill="white" />
+
+        {/* Upward arrow */}
         <path
-          d="M86 481C187 452 337 438 505 479C383 459 226 458 86 481Z"
-          fill="#086497"
+          d="M29 14L33 8L37 14"
+          stroke="white"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
         />
         <path
-          d="M86 481C214 459 386 458 505 479"
-          stroke="#0EA5E9"
-          strokeWidth="3"
+          d="M33 8V20"
+          stroke="white"
+          strokeWidth="2.5"
           strokeLinecap="round"
         />
 
-        {/* Growth bars */}
-        <path d="M124 388L162 353V462H124V388Z" fill="url(#oasisBarGradient)" />
-        <path d="M175 342L214 306V457H175V342Z" fill="url(#oasisBarGradient)" />
-        <path d="M227 359L266 322V454H227V359Z" fill="url(#oasisBarGradient)" />
-        <path d="M278 310L318 256V452H278V310Z" fill="url(#oasisBarGradient)" />
-        <path d="M330 251L370 283V454H330V251Z" fill="url(#oasisBarGradient)" />
-        <path d="M382 284L421 246V462H382V284Z" fill="url(#oasisBarGradient)" />
-        <path d="M435 231L474 193V470H435V231Z" fill="url(#oasisBarGradient)" />
-
-        {/* Trend line */}
-        <path
-          d="M104 408L213 318L249 348L334 226L379 261L483 158"
-          stroke="#0B6FA9"
-          strokeWidth="24"
-          strokeLinejoin="miter"
-          strokeLinecap="square"
-        />
-        <path
-          d="M104 408L213 318L249 348L334 226L379 261L483 158"
-          stroke="#0EA5E9"
-          strokeWidth="12"
-          strokeLinejoin="miter"
-          strokeLinecap="square"
-        />
-
-        {/* Arrow head */}
-        <path d="M449 140L509 130L495 190L483 158L449 140Z" fill="#0EA5E9" />
+        <defs>
+          <linearGradient
+            id="rfm-icon-bg-gradient"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#22c55e" />
+            <stop offset="0.5" stopColor="#16a34a" />
+            <stop offset="1" stopColor="#15803d" />
+          </linearGradient>
+        </defs>
       </svg>
     </div>
   );
