@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 // ============================================
-// Why Oasis MarketPro Page
+// Why RFM Trades Pro Page
 // ============================================
 
 const features = [
@@ -78,7 +78,7 @@ const comparisons = [
 
 const testimonials = [
   {
-    quote: "I've tried multiple platforms, but Oasis MarketPro's execution speed is unmatched. My scalping strategy finally works as intended.",
+    quote: "I've tried multiple platforms, but RFM Trades Pro's execution speed is unmatched. My scalping strategy finally works as intended.",
     author: "Michael R.",
     role: "Professional Day Trader",
     location: "New York, USA",
@@ -90,7 +90,7 @@ const testimonials = [
     location: "London, UK",
   },
   {
-    quote: "As a developer, I appreciate the robust API. Building my trading bots on Oasis MarketPro was seamless.",
+    quote: "As a developer, I appreciate the robust API. Building my trading bots on RFM Trades Pro was seamless.",
     author: "Kenji T.",
     role: "Algorithmic Trader",
     location: "Tokyo, Japan",
@@ -107,7 +107,7 @@ export default function WhyEliteProCapitalPage() {
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Why Choose Oasis MarketPro?
+              Why Choose RFM Trades Pro?
             </h1>
             <p className="text-xl text-[#6b7a90] leading-relaxed mb-8">
               In a market flooded with trading platforms, here's why over 150,000 
@@ -165,7 +165,7 @@ export default function WhyEliteProCapitalPage() {
             <div className="bg-[#0f1419] rounded-xl border border-[#1e2733] overflow-hidden">
               <div className="grid grid-cols-3 bg-[#1e2733] p-4">
                 <div className="text-[#6b7a90] font-medium">Feature</div>
-                <div className="text-[#22c55e] font-semibold text-center">Oasis MarketPro</div>
+                <div className="text-[#22c55e] font-semibold text-center">RFM Trades Pro</div>
                 <div className="text-[#6b7a90] text-center">Industry Average</div>
               </div>
               {comparisons.map((row, index) => (
@@ -222,7 +222,7 @@ export default function WhyEliteProCapitalPage() {
               Regulated & Compliant
             </h2>
             <p className="text-[#6b7a90] leading-relaxed mb-8">
-              Oasis MarketPro operates under strict regulatory oversight. We're registered 
+              RFM Trades Pro operates under strict regulatory oversight. We're registered 
               with major financial authorities and maintain the highest standards of compliance. 
               Your funds are held in segregated accounts at tier-1 banks, completely separate 
               from company operating funds.
@@ -255,7 +255,7 @@ export default function WhyEliteProCapitalPage() {
               Ready to Experience the Difference?
             </h2>
             <p className="text-[#6b7a90] mb-8">
-              Join thousands of traders who've already made the switch to Oasis MarketPro.
+              Join thousands of traders who've already made the switch to RFM Trades Pro.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

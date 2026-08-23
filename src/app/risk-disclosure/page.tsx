@@ -166,7 +166,7 @@ export default function RiskDisclosurePage() {
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">9. No Guarantee of Profits</h2>
                 <p className="leading-relaxed">
-                  Oasis MarketPro does not guarantee any profits from trading. Any examples of 
+                  RFM Trades Pro does not guarantee any profits from trading. Any examples of 
                   potential profits or trading strategies are hypothetical and for educational 
                   purposes only. No representation is being made that any account will or is 
                   likely to achieve profits or losses similar to those discussed.
@@ -192,7 +192,7 @@ export default function RiskDisclosurePage() {
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">11. Acknowledgment</h2>
                 <p className="leading-relaxed">
-                  By opening an account with Oasis MarketPro, you acknowledge that you have read, 
+                  By opening an account with RFM Trades Pro, you acknowledge that you have read, 
                   understood, and accepted this Risk Disclosure Statement. You confirm that you 
                   are aware of the risks involved in trading and are willing to accept these risks 
                   in order to trade in financial markets.

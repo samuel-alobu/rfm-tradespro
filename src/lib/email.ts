@@ -4,17 +4,17 @@ import { Resend } from "resend";
 import { getCopyrightYearRange } from "@/utils";
 
 // ============================================
-// Oasis MarketPro - Email Service Configuration
+// RFM Trades Pro - Email Service Configuration
 // ============================================
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL =
-  process.env.EMAIL_FROM || "Oasis MarketPro <noreply@oasismarketpro.com>";
-const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "Oasis MarketPro";
+  process.env.EMAIL_FROM || "RFM Trades Pro <noreply@rfmtradespro.com>";
+const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "RFM Trades Pro";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const SUPPORT_EMAIL =
-  process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@oasismarketpro.com";
+  process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@rfmtradespro.com";
 
 const BRAND_GREEN = "#22c55e";
 const BRAND_GREEN_DARK = "#16a34a";

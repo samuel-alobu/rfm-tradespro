@@ -9,8 +9,8 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
-    default: "Oasis MarketPro | Trading & Investment Platform",
-    template: "%s | Oasis MarketPro",
+    default: "RFM Trades Pro | Trading & Investment Platform",
+    template: "%s | RFM Trades Pro",
   },
   description:
     "Revolutionizing your digital trading experience. Seamlessly manage your portfolio with top-notch security, 24/7 support, and an intuitive platform.",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "copy trading",
     "real estate investment",
   ],
-  authors: [{ name: "Oasis MarketPro" }],
-  creator: "Oasis MarketPro",
-  publisher: "Oasis MarketPro",
+  authors: [{ name: "RFM Trades Pro" }],
+  creator: "RFM Trades Pro",
+  publisher: "RFM Trades Pro",
   robots: {
     index: true,
     follow: true,
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://oasismarketpro.com",
-    siteName: "Oasis MarketPro",
-    title: "Oasis MarketPro | Trading & Investment Platform",
+    url: "https://rfmtradespro.com",
+    siteName: "RFM Trades Pro",
+    title: "RFM Trades Pro | Trading & Investment Platform",
     description:
       "Revolutionizing your digital trading experience with top-notch security and 24/7 support.",
     images: [
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Oasis MarketPro",
+        alt: "RFM Trades Pro",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Oasis MarketPro | Trading & Investment Platform",
+    title: "RFM Trades Pro | Trading & Investment Platform",
     description:
       "Revolutionizing your digital trading experience with top-notch security and 24/7 support.",
     images: ["/og-image.png"],
@@ -82,8 +82,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="application-name" content="Oasis MarketPro" />
-        <meta name="apple-mobile-web-app-title" content="Oasis MarketPro" />
+        <meta name="application-name" content="RFM Trades Pro" />
+        <meta name="apple-mobile-web-app-title" content="RFM Trades Pro" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

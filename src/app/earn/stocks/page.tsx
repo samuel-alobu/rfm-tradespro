@@ -173,7 +173,7 @@ export default function StocksPage() {
         <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-4 text-center">
-              The Oasis MarketPro Advantage
+              The RFM Trades Pro Advantage
             </h2>
             <p className="text-[#6b7a90] text-center mb-12 max-w-2xl mx-auto">
               Everything you need to become a successful stock investor, all in one platform.
@@ -260,7 +260,7 @@ export default function StocksPage() {
               Start Building Your Portfolio
             </h2>
             <p className="text-[#6b7a90] mb-8">
-              Join millions of investors who trust Oasis MarketPro for their stock investments.
+              Join millions of investors who trust RFM Trades Pro for their stock investments.
             </p>
             <Link
               href="/register"

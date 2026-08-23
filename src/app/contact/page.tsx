@@ -34,7 +34,7 @@ const contactMethods = [
   {
     icon: Mail,
     title: 'Email Support',
-    description: 'support@oasismarketpro.com',
+    description: 'support@rfmtradespro.com',
     action: 'Send Email',
     available: 'Response within 2 hours',
   },
@@ -53,21 +53,21 @@ const offices = [
     address: "1266 East Main Street Suite 603",
     region: "Stamford CT 06902. USA",
     phone: "+1 (908) 279-9340",
-    email: "newyork@oasismarketpro.com",
+    email: "newyork@rfmtradespro.com",
   },
   {
     city: "London",
     address: "45 Canary Wharf Tower",
     region: "London E14 5AB, UK",
     phone: "+44 20 7946 0958",
-    email: "london@oasismarketpro.com",
+    email: "london@rfmtradespro.com",
   },
   {
     city: "Singapore",
     address: "1 Raffles Place, Tower 2",
     region: "Singapore 048616",
     phone: "+65 6521 0100",
-    email: "singapore@oasismarketpro.com",
+    email: "singapore@rfmtradespro.com",
   },
 ];
 

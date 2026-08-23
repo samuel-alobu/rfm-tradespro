@@ -89,7 +89,7 @@ const nextConfig: NextConfig = {
 
   // Environment variables exposed to the browser
   env: {
-    APP_NAME: 'Oasis MarketPro',
+    APP_NAME: 'RFM Trades Pro',
     APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
 

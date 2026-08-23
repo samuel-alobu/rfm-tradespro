@@ -141,7 +141,7 @@ export default function MaintenancePage() {
       {/* Footer */}
       <footer className="p-6 text-center">
         <p className="text-sm text-[#6b7a90]">
-          © {copyrightYearRange} Oasis MarketPro. All rights reserved.
+          © {copyrightYearRange} RFM Trades Pro. All rights reserved.
         </p>
       </footer>
 

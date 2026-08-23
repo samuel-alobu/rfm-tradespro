@@ -71,7 +71,7 @@ export default function AboutPage() {
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              About Oasis MarketPro
+              About RFM Trades Pro
             </h1>
             <p className="text-xl text-[#6b7a90] leading-relaxed">
               Since 2019, we've been on a mission to democratize financial
@@ -107,7 +107,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 text-[#9ca3af] leading-relaxed">
               <p>
-                Oasis MarketPro was founded in 2019 by Wall Street veteran Pat
+                RFM Trades Pro was founded in 2019 by Wall Street veteran Pat
                 LaVecchia with the mission to build a regulated bridge between
                 traditional finance (Web2) and the digital asset space (Web3)
                 Oasis pro LLC established a strong track record by becoming an
@@ -194,7 +194,7 @@ export default function AboutPage() {
               Ready to Start Trading?
             </h2>
             <p className="text-[#6b7a90] mb-8">
-              Join over 150,000 traders who trust Oasis MarketPro with their
+              Join over 150,000 traders who trust RFM Trades Pro with their
               investments.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

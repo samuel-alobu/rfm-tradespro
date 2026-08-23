@@ -22,7 +22,7 @@ const legalDocuments = [
     icon: FileText,
     title: "Terms of Service",
     description:
-      "The terms and conditions governing your use of Oasis MarketPro services.",
+      "The terms and conditions governing your use of RFM Trades Pro services.",
     href: "/terms-of-service",
     updated: "January 15, 2026",
   },
@@ -142,7 +142,7 @@ export default function LegalPage() {
                 Regulatory Status
               </h2>
               <p className="text-[#6b7a90] max-w-2xl mx-auto">
-                Oasis MarketPro operates under strict regulatory oversight in
+                RFM Trades Pro operates under strict regulatory oversight in
                 multiple jurisdictions, ensuring the highest standards of
                 investor protection.
               </p>
@@ -240,10 +240,10 @@ export default function LegalPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:legal@oasismarketpro.com"
+                href="mailto:legal@rfmtradespro.com"
                 className="px-8 py-3 bg-[#22c55e] text-white font-semibold rounded-lg hover:bg-[#1ea550] transition-colors"
               >
-                legal@oasismarketpro.com
+                legal@rfmtradespro.com
               </a>
               <Link
                 href="/contact"

@@ -57,7 +57,7 @@ export default function LandingPage() {
 
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10">
-              Seamlessly merging complexity with ease, Oasis MarketPro offers
+              Seamlessly merging complexity with ease, RFM Trades Pro offers
               top-notch security, 24/7 support, and an intuitive platform for
               your tenacious trading and investment needs.
             </p>
@@ -199,7 +199,7 @@ export default function LandingPage() {
               Ready to Start Your Trading Journey?
             </h2>
             <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-              Join Oasis MarketPro today and access powerful trading tools, expert insights, and a community of successful traders across stocks, crypto, forex, and real estate.
+              Join RFM Trades Pro today and access powerful trading tools, expert insights, and a community of successful traders across stocks, crypto, forex, and real estate.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/register">

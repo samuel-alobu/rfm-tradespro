@@ -326,7 +326,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                 Admin Panel
               </h1>
               <p className="text-xs text-[var(--color-text-muted)]">
-                Oasis MarketPro Management
+                RFM Trades Pro Management
               </p>
             </div>
           </div>

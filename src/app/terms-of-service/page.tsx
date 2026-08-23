@@ -44,7 +44,7 @@ export default function TermsOfServicePage() {
                 </p>
                 <p className="text-sm">
                   Please read these Terms of Service carefully before using
-                  Oasis MarketPro. By accessing or using our services, you agree
+                  RFM Trades Pro. By accessing or using our services, you agree
                   to be bound by these terms. If you do not agree to these
                   terms, do not use our services.
                 </p>
@@ -56,9 +56,9 @@ export default function TermsOfServicePage() {
                 </h2>
                 <p className="leading-relaxed">
                   These Terms of Service ("Terms") constitute a legally binding
-                  agreement between you ("User," "you," or "your") and Oasis
-                  MarketPro, Inc. ("Company," "we," "us," or "our") governing
-                  your access to and use of the Oasis MarketPro trading
+                  agreement between you ("User," "you," or "your") and RFM
+                  Trades Pro, Inc. ("Company," "we," "us," or "our") governing
+                  your access to and use of the RFM Trades Pro trading
                   platform, website, mobile applications, APIs, and all related
                   services (collectively, the "Services").
                 </p>
@@ -284,7 +284,7 @@ export default function TermsOfServicePage() {
                 </h2>
                 <p className="leading-relaxed">
                   All content, trademarks, logos, and intellectual property on
-                  our platform are owned by Oasis MarketPro or its licensors.
+                  our platform are owned by RFM Trades Pro or its licensors.
                   You may not use, copy, modify, distribute, or reproduce any
                   content without our written permission. Your use of our
                   Services does not grant you any ownership rights.
@@ -314,8 +314,8 @@ export default function TermsOfServicePage() {
                   11. Indemnification
                 </h2>
                 <p className="leading-relaxed">
-                  You agree to indemnify, defend, and hold harmless Oasis
-                  MarketPro, its affiliates, officers, directors, employees, and
+                  You agree to indemnify, defend, and hold harmless RFM
+                  Trades Pro, its affiliates, officers, directors, employees, and
                   agents from any claims, damages, losses, liabilities, and
                   expenses (including legal fees) arising from your use of the
                   Services, violation of these Terms, or infringement of any
@@ -385,9 +385,9 @@ export default function TermsOfServicePage() {
                 </p>
                 <div className="bg-[#0f1419] rounded-xl p-6 mt-4 border border-[#1e2733]">
                   <p className="text-white font-semibold mb-2">
-                    Oasis MarketPro Legal Department
+                    RFM Trades Pro Legal Department
                   </p>
-                  <p>Email: legal@oasismarketpro.com</p>
+                  <p>Email: legal@rfmtradespro.com</p>
                   <p>
                     Address: 1266 east main street suite 603 stamford CT 06902.
                     USA

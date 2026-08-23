@@ -30,7 +30,7 @@ const faqCategories = [
       },
       {
         question: 'Which countries do you support?',
-        answer: 'Oasis MarketPro serves traders in over 180 countries worldwide. However, due to regulatory restrictions, we cannot provide services to residents of certain jurisdictions including the United States (for certain products), North Korea, Iran, and other sanctioned regions. Please check our restricted countries list during registration.',
+        answer: 'RFM Trades Pro serves traders in over 180 countries worldwide. However, due to regulatory restrictions, we cannot provide services to residents of certain jurisdictions including the United States (for certain products), North Korea, Iran, and other sanctioned regions. Please check our restricted countries list during registration.',
       },
     ],
   },
@@ -60,7 +60,7 @@ const faqCategories = [
     faqs: [
       {
         question: 'What assets can I trade?',
-        answer: 'Oasis MarketPro offers access to 500+ tradeable assets across multiple markets: 200+ cryptocurrencies (Bitcoin, Ethereum, etc.), 80+ forex pairs (major, minor, and exotic), 15,000+ global stocks and ETFs, commodities (gold, silver, oil, etc.), and indices (S&P 500, NASDAQ, etc.).',
+        answer: 'RFM Trades Pro offers access to 500+ tradeable assets across multiple markets: 200+ cryptocurrencies (Bitcoin, Ethereum, etc.), 80+ forex pairs (major, minor, and exotic), 15,000+ global stocks and ETFs, commodities (gold, silver, oil, etc.), and indices (S&P 500, NASDAQ, etc.).',
       },
       {
         question: 'What is leverage and how does it work?',
@@ -157,7 +157,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-[#6b7a90] mb-8">
-              Find answers to common questions about Oasis MarketPro. If you can\'t find what you\'re looking for, our support team is here to help 24/7.
+              Find answers to common questions about RFM Trades Pro. If you can\'t find what you\'re looking for, our support team is here to help 24/7.
             </p>
             
             {/* Search */}
@@ -280,7 +280,7 @@ export default function FAQPage() {
                 Contact Support
               </Link>
               <a
-                href="mailto:support@oasismarketpro.com"
+                href="mailto:support@rfmtradespro.com"
                 className="px-8 py-3 bg-[#1e2733] text-white font-semibold rounded-lg hover:bg-[#2a3441] transition-colors"
               >
                 Email Us

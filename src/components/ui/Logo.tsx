@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/utils';
 
 // ============================================
-// Logo Component - Oasis MarketPro
+// Logo Component - RFM Trades Pro
 // A unique logo featuring stylized ascending bars
 // forming an abstract growth trajectory with green theme
 // ============================================
@@ -145,7 +145,7 @@ export const Logo: React.FC<LogoProps> = ({
             sizes[size].text,
           )}
         >
-          Oasis <span className="text-sky-500">MarketPro</span>
+          RFM <span className="text-sky-500">Trades Pro</span>
         </span>
       )}
     </div>

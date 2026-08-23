@@ -14,7 +14,7 @@ const footerLinks = {
     title: "About",
     links: [
       { href: "/about", label: "About us" },
-      { href: "/why-oasis-marketpro", label: "Why Oasis MarketPro" },
+      { href: "/why-rfm-trades-pro", label: "Why RFM Trades Pro" },
     ],
   },
   earn: {
@@ -90,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
           <p>
             Oasis Pro Markets, LLC is a member of FINRA / SIPC, and an SEC
             registered broker-dealer and Alternative Trading System. Oasis Pro
-            Markets LLC is a subsidiary of Oasis Pro Inc/ Oasis MarketPro.
+            Markets LLC is a subsidiary of Oasis Pro Inc/ RFM Trades Pro.
           </p>
           <p>
             The risk of loss in online trading of stocks, options, futures,
@@ -118,7 +118,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-[#1e2733]">
           <p className="text-sm text-[#6b7a90]">
-            © {copyrightYearRange} Oasis MarketPro, Inc. All rights reserved.
+            © {copyrightYearRange} RFM Trades Pro, Inc. All rights reserved.
           </p>
         </div>
       </div>

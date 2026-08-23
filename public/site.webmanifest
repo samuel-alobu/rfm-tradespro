@@ -1,6 +1,6 @@
 {
-  "name": "Oasis MarketPro",
-  "short_name": "Oasis MarketPro",
+  "name": "RFM Trades Pro",
+  "short_name": "RFM Trades Pro",
   "description": "Trading & Investment Platform - Revolutionizing your digital trading experience",
   "start_url": "/dashboard",
   "display": "standalone",

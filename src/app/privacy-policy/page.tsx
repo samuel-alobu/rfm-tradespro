@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
                   1. Introduction
                 </h2>
                 <p className="leading-relaxed">
-                  Oasis MarketPro, Inc. ("we," "us," or "our") respects your
+                  RFM Trades Pro, Inc. ("we," "us," or "our") respects your
                   privacy and is committed to protecting your personal data.
                   This Privacy Policy explains how we collect, use, disclose,
                   and safeguard your information when you use our trading
@@ -354,14 +354,14 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <div className="bg-[#0f1419] rounded-xl p-6 mt-4 border border-[#1e2733]">
                   <p className="text-white font-semibold mb-2">
-                    Oasis MarketPro Privacy Team
+                    RFM Trades Pro Privacy Team
                   </p>
-                  <p>Email: privacy@oasismarketpro.com</p>
+                  <p>Email: privacy@rfmtradespro.com</p>
                   <p>
                     Address: 1266 east main street suite 603 stamford CT 06902.
                     USA
                   </p>
-                  <p>Data Protection Officer: dpo@oasismarketpro.com</p>
+                  <p>Data Protection Officer: dpo@rfmtradespro.com</p>
                 </div>
               </div>
             </div>
