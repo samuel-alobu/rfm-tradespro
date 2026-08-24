@@ -25,25 +25,25 @@ import { cn } from '@/utils';
 const contactMethods = [
   {
     icon: Headphones,
-    title: 'Live Chat',
-    description: 'Get instant help from our support team',
-    action: 'Start Chat',
-    available: '24/7',
+    title: "Live Chat",
+    description: "Get instant help from our support team",
+    action: "Start Chat",
+    available: "24/7",
     primary: true,
   },
   {
     icon: Mail,
-    title: 'Email Support',
-    description: 'support@rfmtradespro.com',
-    action: 'Send Email',
-    available: 'Response within 2 hours',
+    title: "Email Support",
+    description: "support@rfmtradespro.com",
+    action: "Send Email",
+    available: "Response within 2 hours",
   },
   {
     icon: Phone,
-    title: 'Phone Support',
-    description: '+1 (908) -0199',
-    action: 'Call Now',
-    available: 'VIP clients only',
+    title: "Phone Support",
+    description: "+1 (971) 382-9192",
+    action: "Call Now",
+    available: "VIP clients only",
   },
 ];
 
@@ -52,23 +52,23 @@ const offices = [
     city: "USA",
     address: "1266 East Main Street Suite 603",
     region: "Stamford CT 06902. USA",
-    phone: "+1 (908) 279-9340",
+    phone: "+1 (971) 382-9192",
     email: "newyork@rfmtradespro.com",
   },
   {
     city: "London",
     address: "45 Canary Wharf Tower",
     region: "London E14 5AB, UK",
-    phone: "+44 20 7946 0958",
+    phone: "+44 73 4730 1596",
     email: "london@rfmtradespro.com",
   },
-  {
-    city: "Singapore",
-    address: "1 Raffles Place, Tower 2",
-    region: "Singapore 048616",
-    phone: "+65 6521 0100",
-    email: "singapore@rfmtradespro.com",
-  },
+  // {
+  //   city: "Singapore",
+  //   address: "1 Raffles Place, Tower 2",
+  //   region: "Singapore 048616",
+  //   phone: "+65 6521 0100",
+  //   email: "singapore@rfmtradespro.com",
+  // },
 ];
 
 const departments = [
